@@ -1,0 +1,89 @@
+plugins {
+    id 'java'
+    id 'org.springframework.boot' version '2.2.6.RELEASE'
+	id 'io.spring.dependency-management' version '1.0.9.RELEASE'
+}
+
+group = 'com.cacoota.boot.porter'
+version = '1.0.0'
+
+sourceCompatibility = targetJavaVersion
+targetCompatibility = targetJavaVersion
+
+[compileJava, compileTestJava, javadoc]*.options*.encoding = 'UTF-8'
+
+
+configurations {
+    all*.exclude group: 'commons-logging'
+    developmentOnly
+	runtimeClasspath {
+		extendsFrom developmentOnly
+	}
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+}
+
+ext {
+    jasypt_version = "3.0.2"
+    fastjson_version = "1.2.68"
+    findbugs_version = "3.0.1"
+    fastjson_kotlin_version = "2.10.3"
+    mybatis_spring_version = "2.1.2"
+    pagehelper_version = "1.2.13"
+    druid_spring_version = "1.1.22"
+    mysql_java_version = "5.1.48"
+    commons_lang3_version = "3.10"
+    commons_text_version = "1.8"
+    commons_pool2_version = "2.8.0"
+    commons_collections4_version = "4.4"
+    commons_io_version = "2.6"
+    jackson_version = "2.11.0"
+    kafka_version = "2.3.1"
+    spring_kafka_version = "2.4.5.RELEASE"
+}
+
+dependencies {
+    implementation "org.springframework.boot:spring-boot-starter"
+    implementation "org.springframework.boot:spring-boot-starter-webflux"
+    implementation "org.springframework.boot:spring-boot-starter-data-rest"
+//    implementation "org.springframework.kafka:spring-kafka:${spring_kafka_version}"
+//    implementation "org.apache.kafka:kafka-examples:${kafka_version}"
+//    implementation "org.apache.kafka:kafka-streams-examples:${kafka_version}"
+
+    implementation "com.alibaba:fastjson:${fastjson_version}"
+    implementation "com.fasterxml.jackson.module:jackson-module-kotlin:${fastjson_kotlin_version}"
+//    implementation "com.github.ulisesbocchio:jasypt-spring-boot-starter:${jasypt_version}"
+//    implementation "com.google.code.findbugs:annotations:${findbugs_version}"
+
+    implementation "org.apache.commons:commons-lang3:${commons_lang3_version}"
+    implementation "org.apache.commons:commons-text:${commons_text_version}"
+    implementation "org.apache.commons:commons-pool2:${commons_pool2_version}"
+    implementation "org.apache.commons:commons-collections4:${commons_collections4_version}"
+    implementation "commons-io:commons-io:${commons_io_version}"
+    implementation group: 'commons-configuration', name: 'commons-configuration', version: '1.10'
+
+    runtimeOnly "org.springframework:spring-context-indexer"
+    compileOnly "org.projectlombok:lombok"
+    annotationProcessor "org.projectlombok:lombok"
+    testImplementation "org.springframework.boot:spring-boot-starter-test"
+
+}
+
+sourceSets {
+    main {
+        java {
+            srcDir 'src/main/java'
+        }
+        resources {
+            srcDir 'src/main/resources'
+        }
+    }
+}
+
+defaultTasks 'clean', 'build'

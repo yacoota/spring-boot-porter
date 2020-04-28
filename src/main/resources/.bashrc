@@ -1,0 +1,1 @@
+export ZOO_LINK_STRING=127.0.0.1:12181

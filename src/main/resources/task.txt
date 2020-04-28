@@ -1,0 +1,3 @@
+{"uuid":"1234","topic":"topic-wx","paths":["/data/firework/data","/data/firework/work"],"name":"wx","type":"1","group":"2","ticket":"im9IEbRuCPQL4iBaq3#$sad"}
+{"uuid":"1343","topic":"topic-tx","paths":["/data/firework/data","/data/firework/work"],"name":"tx","type":"2","group":"1","ticket":"Pn9IEbRuCPQL4iBaq3#$saM"}
+{"uuid":"1541","topic":"topic-tm","paths":["/data/firework/data","/data/firework/work"],"name":"tm","type":"2","group":"3","ticket":"Kx9IEbRuCPQL4iBaq3#$saV"}

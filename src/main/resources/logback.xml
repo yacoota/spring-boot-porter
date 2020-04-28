@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration scan="true" scanPeriod="60 seconds" debug="false" packagingData="true">
+	<!-- 项目名称 -->
+	<contextName>Streaming Data Platform</contextName>
+
+	<property name="USER_HOME" value="logs/spring-boot-porter"/>
+
+	<!-- ConsoleApperder意思是从console中打印出来 -->
+	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+		<!-- 阈值过滤，就是log行为级别过滤，debug及debug以上的信息会被打印出来 -->
+		<filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+			<level>debug</level>
+		</filter>
+		<encoder>
+			<!-- pattern模式 %d时间 %thread 线程名 %level行为级别 %logger logger名称 %method 方法名称 %message 调用方法的入参消息 -->
+			<pattern>%-4d [%thread] %-5level %logger.%method - %message%n</pattern>
+			<charset>UTF-8</charset>
+		</encoder>
+	</appender>
+
+	<!-- 滚动日志文件 -->
+	<appender name="ROLLINGFILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<prudent>true</prudent>
+		<!-- 按天新建log日志 -->
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>${USER_HOME}/spring-boot-porter-%d{yyyyMMdd}-%i.log</fileNamePattern>
+            <!-- 每个文件保留30天，单文件最大500MB，日志文件最大占用20G空间-->
+            <maxHistory>30</maxHistory>
+            <maxFileSize>500MB</maxFileSize>
+            <totalSizeCap>20GB</totalSizeCap>
+            <cleanHistoryOnStart>true</cleanHistoryOnStart>
+        </rollingPolicy>
+        <encoder>
+            <!-- %ex就是指抛出的异常，full是显示全部，如果在{}中写入数字，则表示展示多少行 -->
+            <pattern>%-4d [%thread] %-5level %logger.%method - %msg%n%ex{full, DISPLAY_EX_EVAL}</pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+	</appender>
+
+	<logger name="java.sql" level="DEBUG" additivity="true">
+		<appender-ref ref="STDOUT" />
+		<appender-ref ref="ROLLINGFILE" />
+	</logger>
+
+	<logger name="org.springframework" level="INFO" additivity="false"/>
+
+	<root level="INFO">
+		<appender-ref ref="STDOUT" />
+	</root>
+</configuration>

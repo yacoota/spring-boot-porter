@@ -1,0 +1,8 @@
+server:
+  port: 15555
+
+study:
+  task:
+    hack:
+      init: 60000
+      fixed: 30000
